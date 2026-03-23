@@ -1,15 +1,15 @@
 <template>
-    <div v-if = "character">
+    <div class = "characters "v-if = "character">
         <h2>{{ character.name }}</h2>
         <img :src = "imageURL">
-        <MaterialList :character = "character"/>
+        <material :character = "character"/>
     </div>
 </template>
 
 <script setup>
 import { onMounted, ref, watch, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import MaterialList from '../components/MaterialList.vue'
+import material from '@/components/material.vue'
 const route = useRoute()
 const character = ref(null)
 async function getCharacter(id){
@@ -24,8 +24,20 @@ async function getCharacter(id){
 const imageUrl = computed(() => {
     return `https://genshin.jmp.blue/characters/${route.params.id}/gacha-splash`
 })
+watch(
+    ()=> routes.params.id,
+    function(id){
+        getCharacter
+    }
+)
+onMounted(function())
 </script>
 
 <style scoped>
-
+.characters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
 </style>
