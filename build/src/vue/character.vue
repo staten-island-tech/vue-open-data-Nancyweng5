@@ -26,11 +26,10 @@ const imageUrl = computed(() => {
 })
 watch(
     ()=> routes.params.id,
-    function(id){
-        getCharacter
-    }
 )
-onMounted(function())
+onMounted(()=>{
+    getCharacter(router.params.id)
+})
 </script>
 
 <style scoped>
@@ -40,4 +39,8 @@ onMounted(function())
     gap: 15px;
     justify-content: center;
 }
+img {
+width: 300px;
+}
+
 </style>
