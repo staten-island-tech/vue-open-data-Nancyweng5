@@ -1,19 +1,15 @@
 <template>
-    <router-link :to="'/character/' + name ">
+    <router-link :to="'/character/' +  character.name   ">
         <div class = "card">
-            <img :src = "imageURL"/>
-            <p>{{ name }}</p>
+            <img :src="character.cardImageURL"/>
+            <p>{{character.name }}</p>
         </div>
     </router-link>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-const props = defineProps({
-    name: String
-})
-const imageURL = computed(() => {
-  return `https://genshin.jmp.blue/characters/${props.name}/icon`
+defineProps({
+  character: Object
 })
 </script>
 

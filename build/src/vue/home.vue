@@ -2,7 +2,7 @@
     <div class = "home">
         <h1>Genshin Character Build</h1>
         <characterchart :characters="characters"/>
-   <div class="chart">
+   <div class="grid">
      <charactercard v-for="char in characters":key="char":name="char"/>
    </div>
  </div>
@@ -15,7 +15,7 @@ import characterchart from "@/components/characterchart.vue";
 const characters = ref([])
 async function getcharacters(){
   try {
-    const response = await fetch('https://genshin.jmp.blue/characters')
+    const response = await fetch('https://genshin-app-api.herokuapp.com/api/characters')
     const data = await response.json()
     characters.value = data
   } catch (err){

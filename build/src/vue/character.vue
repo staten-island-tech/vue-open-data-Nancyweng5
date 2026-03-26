@@ -1,7 +1,7 @@
 <template>
-    <div class = "characters "v-if = "character">
+    <div v-if = "character">
         <h2>{{ character.name }}</h2>
-        <img :src = "imageURL">
+        <img :src="character.cardImageURL" />
         <material :character = "character"/>
     </div>
 </template>
@@ -12,35 +12,25 @@ import { useRoute } from 'vue-router'
 import material from '@/components/material.vue'
 const route = useRoute()
 const character = ref(null)
-async function getCharacter(id){
+async function getCharacter(name){
     try {
-        const response = await fetch(`https://genshin.jmp.blue/characters/${id}`)
+        const response = await fetch( `https://genshin-app-api.herokuapp.com/api/characters/info/${name}?infoDataSize=all`)
         const data = await response.json()
         character.value = data
     } catch {
         console.log("Failed to load character")
     }
 }
-const imageUrl = computed(() => {
-    return `https://genshin.jmp.blue/characters/${route.params.id}/gacha-splash`
-})
-watch(
-    ()=> routes.params.id,
+watch(()=> route.params.id,(newId) => {getCharacter(newId)}
 )
 onMounted(()=>{
-    getCharacter(router.params.id)
+    getCharacter(route.params.id)
 })
 </script>
 
 <style scoped>
-.characters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-}
-img {
-width: 300px;
-}
 
+img {
+  width: 300px;
+}
 </style>
