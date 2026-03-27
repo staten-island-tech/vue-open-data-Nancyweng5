@@ -6,6 +6,7 @@
     </div>
 </template>
 
+
 <script setup>
 import { onMounted, ref, watch, computed } from 'vue'
 import { useRoute } from 'vue-router'
@@ -27,6 +28,7 @@ onMounted(()=>{
     getCharacter(route.params.id)
 })
 </script>
+
 
 <style scoped>
 
